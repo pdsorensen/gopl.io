@@ -8,6 +8,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -19,13 +20,19 @@ import (
 func main() {
 	start := time.Now()
 	ch := make(chan string)
+	file, _ := os.Create("output.txt")
+	w := bufio.NewWriter(file)
+
 	for _, url := range os.Args[1:] {
 		go fetch(url, ch) // start a goroutine
 	}
 	for range os.Args[1:] {
-		fmt.Println(<-ch) // receive from channel ch
+		// fmt.Println(<-ch) // receive from channel ch
+		fmt.Fprintf(w, "%s\n", <-ch)
 	}
+
 	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
+	w.Flush()
 }
 
 func fetch(url string, ch chan<- string) {

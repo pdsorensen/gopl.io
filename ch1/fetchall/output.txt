@@ -1,0 +1,8 @@
+0.20s   347305  https://www.polygon.com/
+0.21s   114959  https://www.polygon.com/comics/2020/1/9/20995875/politics-in-comics-dc-marvel-superman-trump-lois-lane-art-spiegelman
+0.21s    12970  https://www.google.com
+0.31s    11071  https://golang.org
+0.45s      888  https://dobbeltk.dk
+0.71s     6819  https://godoc.org
+0.84s     4154  https://gopl.io
+2.22s   178475  https://www.alexa.com/siteinfo/youtube.com
