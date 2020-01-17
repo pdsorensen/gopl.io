@@ -4,9 +4,10 @@
 package popcount_test
 
 import (
+	"fmt"
+	"popcount"
 	"testing"
-
-	"gopl.io/ch2/popcount"
+	// "gopl.io/ch2/popcount"
 )
 
 // -- Alternative implementations --
@@ -64,6 +65,13 @@ func BenchmarkPopCountByClearing(b *testing.B) {
 func BenchmarkPopCountByShifting(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		PopCountByShifting(0x1234567890ABCDEF)
+	}
+}
+
+func BenchmarkPopCountByLoop(b *testing.B) {
+	fmt.Println("Hellosss")
+	for i := 0; i < b.N; i++ {
+		popcount.WithLoop(0x1234567890ABCDEF)
 	}
 }
 

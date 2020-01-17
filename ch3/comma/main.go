@@ -17,6 +17,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 )
@@ -24,6 +25,7 @@ import (
 func main() {
 	for i := 1; i < len(os.Args); i++ {
 		fmt.Printf("  %s\n", comma(os.Args[i]))
+		// fmt.Printf("  %s\n", bytesComma(os.Args[i]))
 	}
 }
 
@@ -35,6 +37,19 @@ func comma(s string) string {
 		return s
 	}
 	return comma(s[:n-3]) + "," + s[n-3:]
+}
+
+func bytesComma(s string) string {
+	var buffer bytes.Buffer
+
+	for i, v := range s {
+		if i%3 == 0 && i != 0 {
+			buffer.WriteString(",")
+		}
+		buffer.WriteRune(v)
+	}
+
+	return buffer.String()
 }
 
 //!-

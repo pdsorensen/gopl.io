@@ -28,4 +28,15 @@ func PopCount(x uint64) int {
 		pc[byte(x>>(7*8))])
 }
 
+// WithLoop returns the population count (number of set bits) of x through a for loop.
+func WithLoop(x uint64) int {
+	result := 0
+	for i := 0; i <= 8; i++ {
+		count := pc[byte(x>>(i*8))]
+		result += int(count)
+	}
+
+	return result
+}
+
 //!-
