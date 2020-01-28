@@ -17,7 +17,8 @@ import (
 )
 
 func main() {
-	counts := make(map[rune]int)    // counts of Unicode characters
+	counts := make(map[rune]int) // counts of Unicode characters
+	categories := make(map[string]int)
 	var utflen [utf8.UTFMax + 1]int // count of lengths of UTF-8 encodings
 	invalid := 0                    // count of invalid UTF-8 characters
 
@@ -35,6 +36,13 @@ func main() {
 			invalid++
 			continue
 		}
+
+		for category, rangeTable := range unicode.Properties {
+			if unicode.In(r, rangeTable) {
+				categories[category]++
+			}
+		}
+
 		counts[r]++
 		utflen[n]++
 	}
@@ -50,6 +58,11 @@ func main() {
 	}
 	if invalid > 0 {
 		fmt.Printf("\n%d invalid UTF-8 characters\n", invalid)
+	}
+
+	fmt.Print("\ncategory\tcount\n")
+	for category, n := range categories {
+		fmt.Printf("%-15s %d\n", category, n)
 	}
 }
 
